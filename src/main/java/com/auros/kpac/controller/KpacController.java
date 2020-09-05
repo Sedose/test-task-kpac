@@ -14,7 +14,7 @@ public class KpacController {
     private final KpacService kpacService;
 
     @GetMapping("/kpacs")
-    private String test(Map<String, Object> model) {
+    private String kpacsView(Map<String, Object> model) {
         model.put("kpacs", kpacService.obtainAllKpacs());
         return "kpac/kpacList";
     }
