@@ -1,5 +1,6 @@
 package com.auros.kpac.repository;
 
+import com.auros.kpac.dto.KpacFilterDto;
 import com.auros.kpac.entity.KpacEntity;
 
 import java.util.List;
@@ -9,5 +10,7 @@ public interface KpacRepository {
 
     void deleteById(long id);
 
-    void save(KpacEntity kpacEntity);
+    void create(KpacEntity kpacEntity);
+
+    List<KpacEntity> findAllFilteredSorted(KpacFilterDto kpacFilterDto);
 }

@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.time.LocalDateTime;
+import java.sql.Date;
 import java.util.Set;
 
 @Getter
@@ -14,6 +14,6 @@ public class KpacEntity {
     private long id;
     private String title;
     private String description;
-    private LocalDateTime creationDateTime;
+    private Date creationDate;
     private Set<KpacSetEntity> kpacSetEntities;
 }

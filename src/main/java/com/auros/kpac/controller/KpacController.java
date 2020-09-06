@@ -5,8 +5,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.Map;
-
 @Controller
 @RequiredArgsConstructor
 public class KpacController {
@@ -14,8 +12,7 @@ public class KpacController {
     private final KpacService kpacService;
 
     @GetMapping("/kpacs")
-    private String kpacsView(Map<String, Object> model) {
-        model.put("kpacs", kpacService.obtainAllKpacs());
+    private String kpacsView() {
         return "kpac/kpacList";
     }
 }

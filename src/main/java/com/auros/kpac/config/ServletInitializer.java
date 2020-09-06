@@ -1,5 +1,6 @@
-package com.auros.kpac;
+package com.auros.kpac.config;
 
+import com.auros.kpac.KpacApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
