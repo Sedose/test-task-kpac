@@ -60,7 +60,7 @@ const kpacSetId = window.location.pathname.split('/').pop();
             const queryParams = toQueryParams(requestParams);
             fetch(`${getContextPath(window.location.pathname)}/${KPAC_SET_API}/${kpacSetId}/kpacs?${queryParams}`)
                 .then(response => response.ok ?
-                    response.json().then(json => { grid.data.parse(json); console.log(json) }) :
+                    response.json().then(json =>  grid.data.parse(json) ) :
                     console.log('Error during sort with filters request. Response: ', response)
                 )
         },
