@@ -54,7 +54,7 @@ const selectKpac = document.getElementById('select_kpac');
         },
         cellDblClick: (event) => {
             console.log(event);
-            window.open(`/set/${event.id}`);
+            window.open(`set/${event.id}`);
         }
     });
 

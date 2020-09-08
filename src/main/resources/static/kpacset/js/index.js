@@ -30,16 +30,16 @@ const kpacSetId = window.location.pathname.split('/').pop();
                 },
             },
         ],
-        data: await retrieveJsonResponse(`${KPAC_SET_API}/${kpacSetId}/kpacs`),
+        data: await retrieveJsonResponse(`${getContextPath(window.location.pathname)}/${KPAC_SET_API}/${kpacSetId}/kpacs`),
         resizable: true,
     });
 
     document.addEventListener('click', listener => {
         if (listener.target && listener.target.name === 'button_delete') {
-            fetch(`${KPAC_SET_API}/${kpacSetId}/kpacs/${listener.target.value}`, {
+            fetch(`${getContextPath(window.location.pathname)}/${KPAC_SET_API}/${kpacSetId}/kpacs/${listener.target.value}`, {
                 method: 'DELETE',
             }).then(response => response.status === 204 ?
-                retrieveJsonResponse(`${KPAC_SET_API}/${kpacSetId}/kpacs`)
+                retrieveJsonResponse(`${getContextPath(window.location.pathname)}/${KPAC_SET_API}/${kpacSetId}/kpacs`)
                     .then(kpacsJson => grid.data.parse(kpacsJson)) :
                 console.log('Error during delete kpac request. Response: ', response)
             );
@@ -58,7 +58,7 @@ const kpacSetId = window.location.pathname.split('/').pop();
                 sortProperty: by,
             };
             const queryParams = toQueryParams(requestParams);
-            fetch(`${KPAC_SET_API}/${kpacSetId}/kpacs?${queryParams}`)
+            fetch(`${getContextPath(window.location.pathname)}/${KPAC_SET_API}/${kpacSetId}/kpacs?${queryParams}`)
                 .then(response => response.ok ?
                     response.json().then(json => { grid.data.parse(json); console.log(json) }) :
                     console.log('Error during sort with filters request. Response: ', response)
@@ -81,7 +81,7 @@ const kpacSetId = window.location.pathname.split('/').pop();
             creationDateTo: filterInputCreationDateTo.value,
         };
         const queryParams = toQueryParams(requestParams);
-        fetch(`${KPAC_SET_API}/${kpacSetId}/kpacs?${queryParams}`)
+        fetch(`${getContextPath(window.location.pathname)}/${KPAC_SET_API}/${kpacSetId}/kpacs?${queryParams}`)
             .then(response => response.ok ?
                 response.json().then(json => grid.data.parse(json)) :
                 console.log('Error during filter kpacs request. Response: ', response)
@@ -91,21 +91,23 @@ const kpacSetId = window.location.pathname.split('/').pop();
     /**
      * Code for managing create new kpac form.
      */
-    createKpacForm.onsubmit = () => {
+    createKpacForm.onsubmit = (event) => {
+        event.preventDefault();
         const createKpacRequestBody = {
             title: inputTitle.value,
             description: inputDescription.value,
             creationDate: inputCreationDate.value,
             kpacSetId: kpacSetId,
         };
-        fetch(KPAC_API, {
+        fetch(`${getContextPath(window.location.pathname)}/${KPAC_API}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(createKpacRequestBody),
         }).then(response => response.ok ?
-            retrieveJsonResponse(KPAC_API).then(kpacsJson => grid.data.parse(kpacsJson)) :
+            retrieveJsonResponse(`${getContextPath(window.location.pathname)}/${KPAC_SET_API}/${kpacSetId}/kpacs`)
+                .then(kpacsJson => grid.data.parse(kpacsJson)) :
             console.log('Error during create kpac request. Response: ', response)
         );
     }

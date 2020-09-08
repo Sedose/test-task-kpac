@@ -1,11 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <html>
 <head>
     <title>K-PAC list</title>
-    <link rel="stylesheet" href="/kpacset/css/main.css">
-    <link rel="stylesheet" href="/lib/dhtmlgrid/codebase/grid.css">
-    <link href="/webjars/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<c:url value="/kpacset/css/main.css"/>"/>
+    <link rel="stylesheet" href="<c:url value="/lib/dhtmlgrid/codebase/grid.css"/>"/>
+    <link rel="stylesheet" href="<c:url value="/webjars/bootstrap/4.5.2/css/bootstrap.min.css"/>"/>
 </head>
 <body>
 <div class="container-fluid">
@@ -59,8 +60,8 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="/lib/dhtmlgrid/codebase/grid.js"></script>
-<script type="text/javascript" src="/common/js/index.js"></script>
-<script type="text/javascript" src="/kpacset/js/index.js"></script>
+<script type="text/javascript" src="<c:url value="/lib/dhtmlgrid/codebase/grid.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/common/js/index.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/kpacset/js/index.js"/>"></script>
 </body>
 </html>
