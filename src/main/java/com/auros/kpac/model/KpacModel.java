@@ -1,18 +1,22 @@
 package com.auros.kpac.model;
 
 import com.auros.kpac.entity.KpacSetEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Set;
 
 @Getter
-@RequiredArgsConstructor
+@ToString
+@AllArgsConstructor
 public class KpacModel {
-    private final long id;
-    private final String title;
-    private final String description;
-    private final LocalDateTime creationDateTime;
-    private final Set<KpacSetEntity> kpacSetEntities;
+    private String id;
+    private String title;
+    private String description;
+    @JsonFormat(pattern = "YYYY-MM-dd")
+    private LocalDate creationDate;
+    private Set<KpacSetEntity> kpacSetEntities;
 }

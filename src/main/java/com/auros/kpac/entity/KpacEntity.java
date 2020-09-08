@@ -1,17 +1,19 @@
 package com.auros.kpac.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.sql.Date;
 import java.util.Set;
 
 @Getter
-@RequiredArgsConstructor
+@Builder
+@AllArgsConstructor
 public class KpacEntity {
-    private final long id;
-    private final String title;
-    private final String description;
-    private final LocalDateTime creationDateTime;
-    private final Set<KpacSetEntity> kpacSetEntities;
+    private long id;
+    private String title;
+    private String description;
+    private Date creationDate;
+    private Set<KpacSetEntity> kpacSetEntities;
 }
