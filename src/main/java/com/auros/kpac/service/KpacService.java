@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface KpacService {
+
     List<KpacModel> obtainAllKpacs();
 
     void deleteKpacById(long id);

@@ -38,7 +38,15 @@ public class DatabaseKpacRepository implements KpacRepository {
             = "SELECT id, title, description, creation_date FROM kpacs "
             + "WHERE creation_date >= :creation_date_from "
             + "AND creation_date <= :creation_date_to ";
-    
+    private static final String SQL_SELECT_ALL_BY_KPAC_SET_ID_FILTERED
+            = "SELECT id, title, description, creation_date "
+            + "FROM kpacs INNER JOIN kpacs_kpac_sets "
+            + "ON kpacs.id = kpacs_kpac_sets.kpac_id "
+            + "WHERE kpacs_kpac_sets.kpac_set_id = :kpac_set_id "
+            + "AND creation_date >= :creation_date_from "
+            + "AND creation_date <= :creation_date_to ";
+    private static final String SQL_TITLE_LIKE = "AND title LIKE :title ";
+    private static final String SQL_DESCRIPTION_LIKE = "AND description LIKE :description ";
 
     private static final String PARAM_NAME_DESCRIPTION = "description";
     private static final String PARAM_NAME_CREATION_DATE = "creation_date";
@@ -140,15 +148,7 @@ public class DatabaseKpacRepository implements KpacRepository {
                                 .build(), kpacSetId);
     }
 
-    private static final String SQL_SELECT_ALL_BY_KPAC_SET_ID_FILTERED
-            = "SELECT id, title, description, creation_date "
-            + "FROM kpacs INNER JOIN kpacs_kpac_sets "
-            + "ON kpacs.id = kpacs_kpac_sets.kpac_id "
-            + "WHERE kpacs_kpac_sets.kpac_set_id = :kpac_set_id "
-            + "AND creation_date >= :creation_date_from "
-            + "AND creation_date <= :creation_date_to ";
-    private static final String SQL_TITLE_LIKE = "AND title LIKE :title ";
-    private static final String SQL_DESCRIPTION_LIKE = "AND description LIKE :description ";
+
     
     @Override
     public List<KpacEntity> findAllByKpacSetIdFiltered(String kpacSetId, KpacFilterDto kpacFilterDto) {
