@@ -3,13 +3,14 @@
 <html>
 <head>
     <title>K-PAC list</title>
-    <link rel="stylesheet" href="kpacList/css/main.css">
-    <link rel="stylesheet" href="lib/dhtmlgrid/codebase/grid.css">
-    <link href="webjars/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/kpacset/css/main.css">
+    <link rel="stylesheet" href="/lib/dhtmlgrid/codebase/grid.css">
+    <link href="/webjars/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="container-fluid">
-    Here comes kpac list
+    Here comes kpac set <br>
+    Kpac set id: ${kpacSet.id}, title: ${kpacSet.title}
     <div class="row">
         <div class="col-sm">
             Filter form
@@ -58,8 +59,8 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="lib/dhtmlgrid/codebase/grid.js"></script>
-<script type="text/javascript" src="common/js/index.js"></script>
-<script type="text/javascript" src="kpacList/js/index.js"></script>
+<script type="text/javascript" src="/lib/dhtmlgrid/codebase/grid.js"></script>
+<script type="text/javascript" src="/common/js/index.js"></script>
+<script type="text/javascript" src="/kpacset/js/index.js"></script>
 </body>
 </html>

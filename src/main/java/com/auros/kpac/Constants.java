@@ -7,4 +7,6 @@ public class Constants {
     public static final String COLUMN_NAME_DESCRIPTION = "description";
     public static final String COLUMN_NAME_CREATION_DATE = "creation_date";
 
+    public static final String PARAM_NAME_ID = "id";
+    public static final String PARAM_NAME_TITLE = "title";;
 }

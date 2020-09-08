@@ -1,11 +1,11 @@
-package com.auros.kpac.dto;
+package com.auros.kpac.kpacset.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class KpacSortDto {
+public class KpacSetSortDto {
     private String sortDirection;
     private String sortProperty;
 }

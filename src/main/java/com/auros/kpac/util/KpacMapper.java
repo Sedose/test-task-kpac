@@ -1,13 +1,14 @@
 package com.auros.kpac.util;
 
 import com.auros.kpac.entity.KpacEntity;
+import com.auros.kpac.entity.KpacSetEntity;
+import com.auros.kpac.kpac.request.CreateKpacRequest;
 import com.auros.kpac.model.KpacModel;
-import com.auros.kpac.request.CreateKpacRequest;
+import com.auros.kpac.model.KpacSetModel;
 
 import java.sql.Date;
 import java.util.HashSet;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 public class KpacMapper {
@@ -18,7 +19,21 @@ public class KpacMapper {
                 .collect(Collectors.toList());
     }
 
-    private static KpacModel toKpacModel(KpacEntity kpacEntity) {
+    public static List<KpacSetModel> toKpacSetModelList(List<KpacSetEntity> kpacSetEntities) {
+        return kpacSetEntities.stream()
+                .map(KpacMapper::toKpacSetModel)
+                .collect(Collectors.toList());
+    }
+
+    public static KpacSetModel toKpacSetModel(KpacSetEntity kpacSetEntity) {
+        return KpacSetModel.builder()
+                .id(kpacSetEntity.getId())
+                .title(kpacSetEntity.getTitle())
+                .kpacEntitySet(kpacSetEntity.getKpacEntitySet())
+                .build();
+    }
+
+    public static KpacModel toKpacModel(KpacEntity kpacEntity) {
         return new KpacModel(
                 String.valueOf(kpacEntity.getId()),
                 kpacEntity.getTitle(),
@@ -28,9 +43,8 @@ public class KpacMapper {
         );
     }
 
-    public static KpacEntity toKpacEntityWithRandomId(CreateKpacRequest createKpacRequest) {
+    public static KpacEntity toKpacEntity(CreateKpacRequest createKpacRequest) {
         return KpacEntity.builder()
-                .id(ThreadLocalRandom.current().nextLong())
                 .title(createKpacRequest.getTitle())
                 .description(createKpacRequest.getDescription())
                 .creationDate(Date.valueOf(createKpacRequest.getCreationDate()))

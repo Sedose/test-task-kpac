@@ -1,17 +1,15 @@
-const KPAC_API = '/api/v1/kpacs/';
+const filterKpacsGridForm = document.getElementById('filter_kpacs_grid_form');
+const filterInputTitle = document.getElementById('filter_input_title');
+const filterInputDescription = document.getElementById('filter_input_description');
+const filterInputCreationDateFrom = document.getElementById('filter_input_creation_date_from');
+const filterInputCreationDateTo = document.getElementById('filter_input_creation_date_to');
+
+const createKpacForm = document.getElementById("create_kpac_form");
+const inputTitle = document.getElementById('input_title');
+const inputDescription = document.getElementById('input_description');
+const inputCreationDate = document.getElementById('input_creation_date');
 
 ( async () => {
-
-    const filterKpacsGridForm = document.getElementById('filter_kpacs_grid_form');
-    const filterInputTitle = document.getElementById('filter_input_title');
-    const filterInputDescription = document.getElementById('filter_input_description');
-    const filterInputCreationDateFrom = document.getElementById('filter_input_creation_date_from');
-    const filterInputCreationDateTo = document.getElementById('filter_input_creation_date_to');
-
-    const createKpacForm = document.getElementById("create_kpac_form");
-    const inputTitle = document.getElementById('input_title');
-    const inputDescription = document.getElementById('input_description');
-    const inputCreationDate = document.getElementById('input_creation_date');
 
     /**
      * Code for managing grid of kpacs.
@@ -30,7 +28,7 @@ const KPAC_API = '/api/v1/kpacs/';
                 },
             },
         ],
-        data: await retrieveKpacsJson(),
+        data: await retrieveJsonResponse(KPAC_API),
         resizable: true,
     });
 
@@ -39,7 +37,7 @@ const KPAC_API = '/api/v1/kpacs/';
             fetch(KPAC_API + listener.target.value, {
                 method: 'DELETE',
             }).then(response => response.status === 204 ?
-                retrieveKpacsJson().then(kpacsJson => grid.data.parse(kpacsJson)) :
+                retrieveJsonResponse(KPAC_API).then(kpacsJson => grid.data.parse(kpacsJson)) :
                 console.log('Error during delete kpac request. Response: ', response)
             );
         }
@@ -59,7 +57,7 @@ const KPAC_API = '/api/v1/kpacs/';
             const queryParams = toQueryParams(requestParams);
             fetch(`${KPAC_API}?${queryParams}`)
                 .then(response => response.ok ?
-                    response.json().then(json => { grid.data.parse(json); console.log(json) }) :
+                    response.json().then( json => grid.data.parse(json) ) :
                     console.log('Error during sort with filters request. Response: ', response)
                 )
         },
@@ -103,20 +101,8 @@ const KPAC_API = '/api/v1/kpacs/';
             },
             body: JSON.stringify(createKpacRequestBody),
         }).then(response => response.ok ?
-            retrieveKpacsJson().then(kpacsJson => grid.data.parse(kpacsJson)) :
+            retrieveJsonResponse(KPAC_API).then(kpacsJson => grid.data.parse(kpacsJson)) :
             console.log('Error during create kpac request. Response: ', response)
         );
     }
 })();
-
-function toQueryParams(requestParams) {
-    return Object.keys(requestParams)
-        .filter(key => requestParams[key])
-        .map(key => `${key}=${requestParams[key]}`)
-        .join('&');
-}
-
-async function retrieveKpacsJson() {
-    const kpacsResponse = await fetch(KPAC_API);
-    return await kpacsResponse.json();
-}

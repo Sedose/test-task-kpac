@@ -1,4 +1,4 @@
-package com.auros.kpac.dto;
+package com.auros.kpac.kpac.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

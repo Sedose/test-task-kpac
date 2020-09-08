@@ -1,18 +1,17 @@
-package com.auros.kpac.controller;
+package com.auros.kpac.controller.rest;
 
+import com.auros.kpac.kpac.request.CreateKpacRequest;
 import com.auros.kpac.model.KpacModel;
-import com.auros.kpac.request.CreateKpacRequest;
 import com.auros.kpac.service.KpacService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
 
-@Slf4j
 @RestController
 @RequestMapping("/api/v1/kpacs")
 @RequiredArgsConstructor
@@ -36,12 +35,12 @@ public class KpacRestController {
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteKpacById(@PathVariable long id) {
-        kpacService.deleteById(id);
+        kpacService.deleteKpacById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createKpac(@RequestBody CreateKpacRequest createKpacRequest) {
+    public void createKpac(@Valid @RequestBody CreateKpacRequest createKpacRequest) {
         kpacService.createKpac(createKpacRequest);
     }
 }
